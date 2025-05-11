@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/fzf-labs/api-import/swagger"
 	"github.com/spf13/cobra"
 )
@@ -11,7 +13,12 @@ var CmdAPIImport = &cobra.Command{
 	Long:  "api import. Example: api-import",
 }
 
-//nolint:gochecknoinits
 func init() {
 	CmdAPIImport.AddCommand(swagger.CmdSwagger)
+}
+
+func main() {
+	if err := CmdAPIImport.Execute(); err != nil {
+		log.Fatal(err)
+	}
 }
